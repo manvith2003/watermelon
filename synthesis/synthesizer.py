@@ -31,32 +31,32 @@ You are an expert at writing Python functions that call the GitHub REST API.
 
 You must generate a Python function that:
 1. Is named exactly: {tool_name}
-2. Takes `client` as the first argument (a GitHubClient instance with .get/.post/.patch/.delete methods)
-3. Takes keyword arguments for all required parameters
-4. Returns a ToolResult: ToolResult(success=True/False, data=<dict or list>, error=<str or None>)
-5. Makes real GitHub REST API calls using `client.get(path)`, `client.post(path, json=...)`, etc.
-6. Handles pagination if needed (GitHub max per_page=100)
-7. Is self-contained — no imports needed except what's already available
+2. Signature: def {tool_name}(client, **kwargs)  — ALWAYS use **kwargs, never positional args after client
+3. Extract params from kwargs like: repo = kwargs.get('repo', '')
+4. repo is ALWAYS in "owner/repo" format — split it like: owner, name = repo.split('/', 1)
+5. MUST return ToolResult(success=True, data=...) or ToolResult(success=False, data=None, error="...")
+6. NEVER return a plain dict — always ToolResult
+7. Use client.get(path), client.post(path, json=...) for API calls
+8. No imports needed — these are pre-imported: ToolResult, client, datetime, json, re
 
-Available imports in scope:
-- client.get(path, params=None) → dict/list
-- client.post(path, json=None) → dict
-- client.patch(path, json=None) → dict
-- client.delete(path) → dict
-- ToolResult(success, data, error=None)
-
-GitHub API base: https://api.github.com (already handled by client)
+EXAMPLE of a correct function:
+def example_tool(client, **kwargs):
+    repo = kwargs.get('repo', '')
+    owner, name = repo.split('/', 1)
+    data = client.get(f'/repos/{{owner}}/{{name}}/issues', params={{'state': 'open', 'per_page': 100}})
+    result = [{{'number': i['number'], 'title': i['title']}} for i in data if 'pull_request' not in i]
+    return ToolResult(success=True, data=result)
 
 KNOWN CONSTRAINTS TO RESPECT:
 {constraints}
 
-Return ONLY a JSON object with:
-{
+Return ONLY a JSON object with these exact keys:
+{{
   "function_code": "def {tool_name}(client, **kwargs):\\n    ...",
-  "params_schema": {"param_name": {"type": "str", "required": true, "default": null}, ...},
+  "params_schema": {{"repo": {{"type": "str", "required": true, "default": null}}}},
   "description": "one-line description of what this tool does",
   "reasoning": "why you implemented it this way"
-}
+}}
 """
 
 SYNTHESIS_FIX_PROMPT = """\
@@ -72,12 +72,12 @@ TRACEBACK:
 {traceback}
 
 Return JSON with the same format as before:
-{
+{{
   "function_code": "...",
-  "params_schema": {...},
+  "params_schema": {{}},
   "description": "...",
   "reasoning": "what was wrong and how you fixed it"
-}
+}}
 """
 
 
@@ -156,9 +156,15 @@ def synthesize_capability(
 
         # Compile check
         try:
+            import datetime as _dt
+            import json as _json
+            import re as _re
             namespace: dict[str, Any] = {
                 "ToolResult": ToolResult,
                 "client": client,
+                "datetime": _dt,
+                "json": _json,
+                "re": _re,
             }
             exec(code, namespace)
             fn = namespace.get(tool_name)
