@@ -20,7 +20,7 @@ from tools.registry import get_tool_descriptions
 
 LLM_MODEL = os.environ.get("LLM_MODEL", "groq/llama-3.3-70b-versatile")
 
-PLANNER_SYSTEM = """\
+PLANNER_SYSTEM_TEMPLATE = """\
 You are an autonomous GitHub platform agent. Your job is to decompose a natural language
 instruction into an ordered list of executable steps using the available GitHub tools.
 
@@ -40,26 +40,26 @@ RULES:
 7. confidence: 0.0-1.0 — how sure you are this step will succeed.
 8. For each step, include "memory_note" explaining if/how memory influenced this choice.
 
-OUTPUT FORMAT:
-{
+OUTPUT FORMAT (return exactly this structure):
+{{
   "plan_summary": "one sentence",
   "steps": [
-    {
+    {{
       "id": 1,
       "description": "human-readable description",
       "tool": "tool_name",
-      "params": { "repo": "owner/repo", ... },
+      "params": {{"repo": "owner/repo"}},
       "depends_on": [],
       "confidence": 0.9,
       "memory_note": "reusing known-good approach from similar past execution",
       "rollback_tool": null,
       "rollback_params": null
-    }
+    }}
   ],
   "capability_gaps": [],
   "estimated_api_calls": 3,
   "memory_used": true
-}
+}}
 """
 
 
@@ -73,7 +73,7 @@ def plan(instruction: str, repo: Optional[str] = None) -> dict:
     memory_context_str = format_context_for_prompt(context)
     tool_descriptions = get_tool_descriptions()
 
-    system_prompt = PLANNER_SYSTEM.format(
+    system_prompt = PLANNER_SYSTEM_TEMPLATE.format(
         tool_descriptions=tool_descriptions,
         memory_context=memory_context_str,
     )
