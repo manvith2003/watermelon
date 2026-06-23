@@ -156,7 +156,14 @@ def execute_plan(plan: dict, client: GitHubClient) -> dict:
             except ValidationError as e:
                 error_msg = str(e)
                 record_constraint(tool_name, "validation", str(e))
-                # Ask LLM how to fix
+                # Handle "already_exists" gracefully — treat as success, resource is already there
+                if "already_exists" in str(e).lower():
+                    status = "success"
+                    result_data = {"note": f"Already exists — skipped creation", "raw_error": str(e)[:100]}
+                    decision = "skipped — resource already exists (treated as success)"
+                    record_capability_use(tool_name, True, int((time.time() - step_start) * 1000))
+                    break
+                # Ask LLM how to fix other validation errors
                 fix = _ask_failure_decision(step, str(e), report_steps, steps[steps.index(step)+1:])
                 if fix["action"] == "retry" and retries < MAX_RETRIES:
                     params.update(fix.get("retry_modified_params", {}))
