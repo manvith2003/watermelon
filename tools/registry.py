@@ -59,7 +59,7 @@ def _load_synthesized_tools():
     """Load previously synthesized tools from DB and compile them into the registry."""
     for cap in get_synthesized_capabilities():
         try:
-            namespace: dict = {}
+            namespace: dict = _synthesis_namespace()
             exec(cap["implementation"], namespace)
             fn = namespace.get(cap["name"])
             if fn and callable(fn):
@@ -82,6 +82,13 @@ def get_all_tool_names() -> list[str]:
     return list(_TOOL_REGISTRY.keys())
 
 
+def _synthesis_namespace() -> dict:
+    """Shared namespace for compiling synthesized tools — includes common stdlib."""
+    import datetime, json, re
+    from tools.base import ToolResult
+    return {"ToolResult": ToolResult, "datetime": datetime, "json": json, "re": re}
+
+
 def register_synthesized_tool(name: str, description: str, implementation: str,
                                params_schema: Optional[dict] = None) -> bool:
     """
@@ -89,7 +96,7 @@ def register_synthesized_tool(name: str, description: str, implementation: str,
     Returns True if successful, False if compilation fails.
     """
     try:
-        namespace: dict = {}
+        namespace: dict = _synthesis_namespace()
         exec(implementation, namespace)
         fn = namespace.get(name)
         if not fn or not callable(fn):
