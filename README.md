@@ -1,5 +1,10 @@
 # Autonomous Platform Intelligence Agent — GitHub
 
+## Architecture
+
+![Architecture Diagram](./docs/ARCHITECTURE.svg)
+
+
 Watermelon Software Recruitment Assignment submission.
 
 ## Setup
