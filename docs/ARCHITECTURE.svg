@@ -1,100 +1,101 @@
-<svg viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, sans-serif">
-  <rect width="900" height="620" fill="#0d1117" rx="12"/>
-  <text x="450" y="36" text-anchor="middle" fill="#e6edf3" font-size="16" font-weight="700">Autonomous GitHub Platform Intelligence Agent — Architecture</text>
-  <text x="18" y="88" fill="#8b949e" font-size="10" font-weight="600" letter-spacing="1">USER</text>
-  <text x="18" y="188" fill="#8b949e" font-size="10" font-weight="600" letter-spacing="1">AGENT CORE</text>
-  <text x="18" y="338" fill="#8b949e" font-size="10" font-weight="600" letter-spacing="1">MEMORY</text>
-  <text x="18" y="468" fill="#8b949e" font-size="10" font-weight="600" letter-spacing="1">TOOLS</text>
-  <text x="18" y="568" fill="#8b949e" font-size="10" font-weight="600" letter-spacing="1">EXTERNAL</text>
-  <line x1="90" y1="110" x2="880" y2="110" stroke="#21262d" stroke-width="1"/>
-  <line x1="90" y1="270" x2="880" y2="270" stroke="#21262d" stroke-width="1"/>
-  <line x1="90" y1="420" x2="880" y2="420" stroke="#21262d" stroke-width="1"/>
-  <line x1="90" y1="530" x2="880" y2="530" stroke="#21262d" stroke-width="1"/>
-  <rect x="300" y="58" width="300" height="44" rx="8" fill="#1f6feb" opacity="0.15" stroke="#1f6feb" stroke-width="1.5"/>
-  <text x="450" y="75" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">Natural Language Instruction</text>
-  <text x="450" y="93" text-anchor="middle" fill="#8b949e" font-size="10">"create a bug report for the login timeout issue"</text>
-  <rect x="100" y="125" width="155" height="56" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
-  <text x="178" y="147" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">Orchestrator</text>
-  <text x="178" y="163" text-anchor="middle" fill="#8b949e" font-size="10">agent/core.py</text>
-  <text x="178" y="175" text-anchor="middle" fill="#8b949e" font-size="10">ties all layers together</text>
-  <rect x="285" y="125" width="155" height="56" rx="8" fill="#161b22" stroke="#388bfd" stroke-width="1.5"/>
-  <text x="363" y="147" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">Planner</text>
-  <text x="363" y="163" text-anchor="middle" fill="#8b949e" font-size="10">agent/planner.py</text>
-  <text x="363" y="175" text-anchor="middle" fill="#8b949e" font-size="10">LLM → JSON step plan</text>
-  <rect x="470" y="125" width="155" height="56" rx="8" fill="#161b22" stroke="#388bfd" stroke-width="1.5"/>
-  <text x="548" y="147" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">Executor</text>
-  <text x="548" y="163" text-anchor="middle" fill="#8b949e" font-size="10">agent/executor.py</text>
-  <text x="548" y="175" text-anchor="middle" fill="#8b949e" font-size="10">runs steps + handles failures</text>
-  <rect x="655" y="125" width="155" height="56" rx="8" fill="#161b22" stroke="#f0883e" stroke-width="1.5"/>
-  <text x="733" y="147" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Synthesizer</text>
-  <text x="733" y="163" text-anchor="middle" fill="#8b949e" font-size="10">synthesis/synthesizer.py</text>
-  <text x="733" y="175" text-anchor="middle" fill="#8b949e" font-size="10">generates tools at runtime</text>
-  <rect x="100" y="285" width="155" height="56" rx="8" fill="#161b22" stroke="#8957e5" stroke-width="1.5"/>
-  <text x="178" y="307" text-anchor="middle" fill="#d2a8ff" font-size="12" font-weight="600">Memory Manager</text>
-  <text x="178" y="323" text-anchor="middle" fill="#8b949e" font-size="10">memory/memory_manager.py</text>
-  <text x="178" y="335" text-anchor="middle" fill="#8b949e" font-size="10">formats context for planner</text>
-  <rect x="285" y="285" width="155" height="56" rx="8" fill="#161b22" stroke="#8957e5" stroke-width="1.5"/>
-  <text x="363" y="307" text-anchor="middle" fill="#d2a8ff" font-size="12" font-weight="600">Execution Memory</text>
-  <text x="363" y="323" text-anchor="middle" fill="#8b949e" font-size="10">past runs · step patterns</text>
-  <text x="363" y="335" text-anchor="middle" fill="#8b949e" font-size="10">timing · learnings</text>
-  <rect x="470" y="285" width="155" height="56" rx="8" fill="#161b22" stroke="#8957e5" stroke-width="1.5"/>
-  <text x="548" y="307" text-anchor="middle" fill="#d2a8ff" font-size="12" font-weight="600">Capability Memory</text>
-  <text x="548" y="323" text-anchor="middle" fill="#8b949e" font-size="10">tools · success rates</text>
-  <text x="548" y="335" text-anchor="middle" fill="#8b949e" font-size="10">runtime constraints</text>
-  <rect x="655" y="285" width="155" height="56" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="1.5"/>
-  <text x="733" y="307" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Learning Loop</text>
-  <text x="733" y="323" text-anchor="middle" fill="#8b949e" font-size="10">learning/feedback.py</text>
-  <text x="733" y="335" text-anchor="middle" fill="#8b949e" font-size="10">API call improvement signal</text>
-  <rect x="285" y="350" width="340" height="22" rx="4" fill="#21262d"/>
-  <text x="455" y="365" text-anchor="middle" fill="#8b949e" font-size="10">SQLite — 4 tables: executions · step_patterns · capabilities · runtime_constraints</text>
-  <rect x="100" y="435" width="155" height="50" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
-  <text x="178" y="455" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">Tool Registry</text>
-  <text x="178" y="471" text-anchor="middle" fill="#8b949e" font-size="10">tools/registry.py</text>
-  <text x="178" y="483" text-anchor="middle" fill="#8b949e" font-size="9">lookup · register · call</text>
-  <rect x="285" y="435" width="340" height="50" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
-  <text x="455" y="455" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">18 Base GitHub Tools</text>
-  <text x="455" y="471" text-anchor="middle" fill="#8b949e" font-size="10">tools/github_tools.py</text>
-  <text x="455" y="483" text-anchor="middle" fill="#8b949e" font-size="9">issues · PRs · labels · milestones · releases · users</text>
-  <rect x="655" y="435" width="155" height="50" rx="8" fill="#2d1b00" stroke="#f0883e" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="733" y="455" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Synthesized Tools</text>
-  <text x="733" y="471" text-anchor="middle" fill="#8b949e" font-size="10">generated at runtime</text>
-  <text x="733" y="483" text-anchor="middle" fill="#8b949e" font-size="9">e.g. get_issue_age_report</text>
-  <rect x="250" y="545" width="160" height="44" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
-  <text x="330" y="563" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">GitHub REST API</text>
-  <text x="330" y="579" text-anchor="middle" fill="#8b949e" font-size="10">api.github.com</text>
-  <rect x="490" y="545" width="160" height="44" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
-  <text x="570" y="563" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">LLM — Groq</text>
-  <text x="570" y="579" text-anchor="middle" fill="#8b949e" font-size="10">llama-3.3-70b (free tier)</text>
+<svg viewBox="0 0 720 500" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <rect width="720" height="500" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="360" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">GitHub Agent — How It Works</text>
+
+  <!-- User box -->
+  <rect x="270" y="50" width="180" height="40" rx="6" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="360" y="75" text-anchor="middle" font-size="12" fill="#333">You (plain English instruction)</text>
+
+  <!-- Arrow down -->
+  <line x1="360" y1="90" x2="360" y2="118" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Planner box -->
+  <rect x="230" y="120" width="260" height="44" rx="6" fill="#fff3cd" stroke="#e0a800" stroke-width="1.5"/>
+  <text x="360" y="138" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Planner  (agent/planner.py)</text>
+  <text x="360" y="156" text-anchor="middle" font-size="10" fill="#666">LLM breaks instruction into steps</text>
+
+  <!-- Arrow down -->
+  <line x1="360" y1="164" x2="360" y2="192" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Executor box -->
+  <rect x="230" y="194" width="260" height="44" rx="6" fill="#d4edda" stroke="#28a745" stroke-width="1.5"/>
+  <text x="360" y="212" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Executor  (agent/executor.py)</text>
+  <text x="360" y="230" text-anchor="middle" font-size="10" fill="#666">Runs each step, handles failures</text>
+
+  <!-- Arrow down to tools -->
+  <line x1="360" y1="238" x2="360" y2="266" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- GitHub Tools box -->
+  <rect x="200" y="268" width="160" height="44" rx="6" fill="#f8d7da" stroke="#dc3545" stroke-width="1.5"/>
+  <text x="280" y="286" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">GitHub Tools</text>
+  <text x="280" y="302" text-anchor="middle" font-size="10" fill="#666">18 built-in API functions</text>
+
+  <!-- Synthesizer box -->
+  <rect x="380" y="268" width="160" height="44" rx="6" fill="#e2d9f3" stroke="#6f42c1" stroke-width="1.5"/>
+  <text x="460" y="286" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Synthesizer</text>
+  <text x="460" y="302" text-anchor="middle" font-size="10" fill="#666">Generates new tools via LLM</text>
+
+  <!-- Arrow from executor to synthesizer -->
+  <line x1="450" y1="238" x2="450" y2="266" stroke="#6f42c1" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-p)"/>
+
+  <!-- Arrow from GitHub Tools to GitHub API -->
+  <line x1="280" y1="312" x2="280" y2="360" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- GitHub API box -->
+  <rect x="170" y="362" width="190" height="40" rx="6" fill="#f0f0f0" stroke="#888" stroke-width="1.5"/>
+  <text x="265" y="378" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">GitHub REST API</text>
+  <text x="265" y="394" text-anchor="middle" font-size="10" fill="#666">api.github.com</text>
+
+  <!-- Groq LLM box -->
+  <rect x="390" y="362" width="190" height="40" rx="6" fill="#f0f0f0" stroke="#888" stroke-width="1.5"/>
+  <text x="485" y="378" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Groq LLM</text>
+  <text x="485" y="394" text-anchor="middle" font-size="10" fill="#666">llama-3.3-70b (free tier)</text>
+
+  <!-- Arrow from synthesizer to Groq -->
+  <line x1="460" y1="312" x2="480" y2="360" stroke="#6f42c1" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-p)"/>
+
+  <!-- Memory box on left -->
+  <rect x="30" y="170" width="160" height="120" rx="6" fill="#e8f8f5" stroke="#1abc9c" stroke-width="1.5"/>
+  <text x="110" y="192" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Memory (SQLite)</text>
+  <text x="110" y="210" text-anchor="middle" font-size="9" fill="#555">executions</text>
+  <text x="110" y="225" text-anchor="middle" font-size="9" fill="#555">step_patterns</text>
+  <text x="110" y="240" text-anchor="middle" font-size="9" fill="#555">capabilities</text>
+  <text x="110" y="255" text-anchor="middle" font-size="9" fill="#555">runtime_constraints</text>
+  <text x="110" y="275" text-anchor="middle" font-size="9" fill="#888">memory/db.py</text>
+
+  <!-- Arrow: Planner reads memory -->
+  <line x1="190" y1="210" x2="230" y2="175" stroke="#1abc9c" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+  <text x="195" y="190" font-size="8" fill="#1abc9c">reads</text>
+
+  <!-- Arrow: Executor writes memory -->
+  <line x1="230" y1="220" x2="190" y2="230" stroke="#1abc9c" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+  <text x="193" y="245" font-size="8" fill="#1abc9c">writes</text>
+
+  <!-- Learning label -->
+  <text x="110" y="310" text-anchor="middle" font-size="9" fill="#1abc9c" font-style="italic">Self-learning loop:</text>
+  <text x="110" y="322" text-anchor="middle" font-size="9" fill="#1abc9c" font-style="italic">fewer API calls over time</text>
+
+  <!-- Legend -->
+  <rect x="30" y="430" width="660" height="50" rx="4" fill="#f9f9f9" stroke="#ddd" stroke-width="1"/>
+  <line x1="50" y1="455" x2="80" y2="455" stroke="#555" stroke-width="1.5"/>
+  <text x="85" y="459" font-size="9" fill="#555">normal flow</text>
+  <line x1="145" y1="455" x2="175" y2="455" stroke="#6f42c1" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="180" y="459" font-size="9" fill="#6f42c1">synthesis path</text>
+  <line x1="260" y1="455" x2="290" y2="455" stroke="#1abc9c" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="295" y="459" font-size="9" fill="#1abc9c">memory read/write</text>
+  <text x="420" y="459" font-size="9" fill="#666">Planner uses memory before every run → learns optimal step order</text>
+
   <defs>
-    <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8b949e"/></marker>
-    <marker id="arr-blue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#388bfd"/></marker>
-    <marker id="arr-purple" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8957e5"/></marker>
-    <marker id="arr-orange" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f0883e"/></marker>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#555"/>
+    </marker>
+    <marker id="arr-p" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#6f42c1"/>
+    </marker>
+    <marker id="arr-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#1abc9c"/>
+    </marker>
   </defs>
-  <line x1="450" y1="102" x2="230" y2="124" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr-blue)" stroke-dasharray="4,2"/>
-  <line x1="255" y1="153" x2="284" y2="153" stroke="#388bfd" stroke-width="1.5" marker-end="url(#arr-blue)"/>
-  <line x1="440" y1="153" x2="469" y2="153" stroke="#388bfd" stroke-width="1.5" marker-end="url(#arr-blue)"/>
-  <line x1="625" y1="153" x2="654" y2="153" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-orange)" stroke-dasharray="4,2"/>
-  <line x1="363" y1="181" x2="295" y2="284" stroke="#8957e5" stroke-width="1.5" marker-end="url(#arr-purple)" stroke-dasharray="3,2"/>
-  <line x1="548" y1="181" x2="548" y2="284" stroke="#8957e5" stroke-width="1.5" marker-end="url(#arr-purple)"/>
-  <line x1="700" y1="181" x2="610" y2="284" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-orange)" stroke-dasharray="3,2"/>
-  <line x1="255" y1="313" x2="284" y2="313" stroke="#8957e5" stroke-width="1" marker-end="url(#arr-purple)"/>
-  <line x1="733" y1="181" x2="733" y2="284" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr)"/>
-  <line x1="510" y1="181" x2="220" y2="434" stroke="#30363d" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="3,2"/>
-  <line x1="255" y1="460" x2="284" y2="460" stroke="#30363d" stroke-width="1.5" marker-end="url(#arr)"/>
-  <line x1="625" y1="460" x2="654" y2="460" stroke="#f0883e" stroke-width="1" marker-end="url(#arr-orange)" stroke-dasharray="3,2"/>
-  <line x1="380" y1="485" x2="340" y2="544" stroke="#30363d" stroke-width="1.5" marker-end="url(#arr)"/>
-  <line x1="440" y1="181" x2="540" y2="544" stroke="#30363d" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="3,2"/>
-  <line x1="733" y1="181" x2="620" y2="544" stroke="#f0883e" stroke-width="1" marker-end="url(#arr-orange)" stroke-dasharray="3,2"/>
-  <rect x="100" y="595" width="680" height="20" rx="4" fill="#161b22"/>
-  <circle cx="125" cy="605" r="4" fill="#388bfd"/>
-  <text x="134" y="609" fill="#8b949e" font-size="10">Agent flow</text>
-  <circle cx="210" cy="605" r="4" fill="#8957e5"/>
-  <text x="219" y="609" fill="#8b949e" font-size="10">Memory read/write</text>
-  <circle cx="330" cy="605" r="4" fill="#f0883e"/>
-  <text x="339" y="609" fill="#8b949e" font-size="10">Synthesis path</text>
-  <circle cx="440" cy="605" r="4" fill="#3fb950"/>
-  <text x="449" y="609" fill="#8b949e" font-size="10">Learning signal</text>
-  <line x1="530" y1="605" x2="550" y2="605" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <text x="555" y="609" fill="#8b949e" font-size="10">conditional path</text>
 </svg>
